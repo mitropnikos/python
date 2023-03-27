@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 
 from pyhive import hive
-from pyhive import hive
 import csv
-from datetime import datetime
-from datetime import timedelta
-from datetime import date
+from datetime import datetime, timedelta, date
 import uuid
 import random
 from itertools import izip_longest as zip_longest
