@@ -3,7 +3,7 @@ query on hdfs
 """
 
 query2 = """
-create table hdfs_staging_tbl 
+create table citus_staging_tbl 
 (
 ....
 )
