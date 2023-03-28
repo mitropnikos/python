@@ -1,5 +1,6 @@
 query1 = """
-query on hdfs
+create table hdfs_staging_table as 
+....
 """
 
 query2 = """
@@ -11,7 +12,7 @@ create table citus_staging_tbl
 
 query3 = """
 insert into hdfs_citus_staging_tbl
-select * from hdfs_staging_tbl 
+select * from hdfs_staging_table 
 """
 
 query4 = """
