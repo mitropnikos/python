@@ -13,3 +13,8 @@ def get_sql_data(dsn, query):
     conn = pyodbc.connect(f'DSN={dsn}', autocommit=True)
     return pd.read_sql(query, conn)
     conn.close()
+
+    
+ def log_screen(txt):
+    now = datetime.now()
+    print(now.strftime("%Y-%m-%d %H:%M:%S") + ' ' + txt)
