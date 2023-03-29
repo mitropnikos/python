@@ -9,7 +9,7 @@ students = [
     },
     {
         "fname" : "Xristina",
-        "lname" : "Saro",
+        "lname" : "Saroglou",
         "fathersname" : "Greg",
         "age" : 11,
         "class" : 5,
@@ -17,7 +17,7 @@ students = [
     },
     {
         "fname": "Greg",
-        "lname": "Maslou",
+        "lname": "Masloumidis",
         "fathersname": "Pantelis",
         "age": 12,
         "class": 6,
@@ -27,9 +27,24 @@ students = [
 max_id = 0
 found_student = False # flag to indicate if the student was found
 
+def search_by_last_name(last_name):
+    last_names = [student for student in students if student['lname'] == last_name]
+    return last_names
+
+def search_by_id(id):
+    ids = [student for student in students if student['id'] == id]
+    return ids
+
+def update_by_id(id):
+    for student in students:
+        if student['id'] == id :
+            id_age = input("Update Age : ")
+            id_class = input("Update Class : ")
+
+            student['age'] = id_age
+            student['class'] = id_class
 
 def print_student_details():
-
     for student in students:
         print(f"{student['fname']} {student['fathersname'][0]}. {student['lname']}")
 
@@ -96,6 +111,7 @@ def main():
         for student in students:
             if student['id'] > max_id:
                 max_id = student['id'] #find the max id and update it if needed
+        print()
         print("*" * 25)
         print('Please choose from the Below Options :\n'
               '1. Create a Record\n'
@@ -103,7 +119,7 @@ def main():
               '3. Update a Record\n'
               '4. Delete a Record\n'
               '5. Quit')
-        print("*" * 25)
+        print("*" * 25 + '\n')
         choise = int(input('Please Choose : '))
 
         if choise == 1:
@@ -133,10 +149,46 @@ def main():
                 print("\n")
 
         elif choise == 3:
-            pass
+            print("Please Choose From the below Options : \n"
+                  "1. Search by Student's Last name\n"
+                  "2. Search by Student's ID")
+            ch = input("Please Choose : ")
+            while ch not in ["1","2"] :
+                ch = input("Please Choose {1,2] : ")
+
+            if ch == '1':
+                name_ch = input("Please Provide Student's Last Name : ")
+                name_ch = search_by_last_name(name_ch)
+                if len(name_ch) == 0 :
+                    print('No Records')
+                elif len(name_ch) == 1 :
+                    print(name_ch)
+                elif len(name_ch) >= 2 :
+                    for student in name_ch:
+                        print(student)
+                    print('---------------------')
+                    print('Update Student By ID')
+                    name_id = input("Provide ID : ")
+                    while name_id.isalpha():
+                        name_id = input("No letters Please. Provide ID :")
+                    name_id = int(name_id)
+                    update_by_id(name_id)
+
+            elif ch == "2":
+                id_ch = input("Please Provide Student's ID : ")
+                while id_ch.isalpha():
+                    id_ch = input("No letters Please. Please Provide Student's ID : ")
+                id_ch = int(id_ch)
+                id_results = search_by_id(id_ch)
+                if len(id_results) == 0:
+                    print('No Records')
+                else :
+                    print(f"Student Details Are : {id_results}\n"
+                          f"Update Records")
+                    update_by_id(id_ch)
 
         elif choise == 4:
-            pass
+            ...
 
         elif choise == 5:
             print('Bye Bye')
