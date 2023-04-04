@@ -9,8 +9,8 @@ import openpyxl
 This Script scans the provided applications and distinguishes them based on some criteria. Brief explanation : 
 
 1. Code line 9 → Insert hardcoded the applications for investigation. 
-2. Line 173 → Change the desired criteria. Note : If applications fullfil these criteria they will be suggested for Blacklist.
-3. Line 189 → Apply the desired Rating. Applications with <= {Rating} will be suggested for Blacklist.
+2. Line 173 → Change the desired criteria. Note : If applications fullfil these criteria they will be marked as "undesired".
+3. Line 189 → Apply the desired Rating. Applications with <= {Rating} will be marked as "undesired"
 4. Line 190 → parse_apps_comments(scan_comments_count = 100) This line scans the last 100 comments for each app. Apply a new number if you want. 
 Tested with Python 3.8
 """
