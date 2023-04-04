@@ -1,5 +1,5 @@
 """
-A simplified verstion
+A simplified version
 """
 
 from random import randrange
