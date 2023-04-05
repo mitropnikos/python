@@ -49,6 +49,65 @@ def print_student_details():
         print(f"{student['fname']} {student['fathersname'][0]}. {student['lname']}")
 
 
+def delete_pupil_by_id(id):
+    for student in students:
+        if student['id'] == id :
+            students.remove(student)
+
+def delete_method() :
+    choise = input("Delete by Last Name or ID?\n"
+                   "Type 1 for Last Nane, 2 for ID : ")
+    while choise not in ["1", "2"]:
+        choise = input("[1-2] Please... : ")
+
+    if choise == "1":
+        name_choise = input("Provide Student's Last name : ")
+        results = search_by_last_name(name_choise)
+        
+        if len(results) > 1 :
+            print("Students Details Are :")
+            for student in results :
+                print(student)
+            id_choise = input("Provide Student's ID to be deleted : ").strip()
+            while id_choise.isalpha():
+                id_choise = input("Numbers Please.. Provide Student's ID to be deleted : ").strip()
+            id_choise = int(id_choise)
+            
+            if id_choise in results:
+                delete_pupil_by_id(id_choise)
+                print('Student Deleted')
+            
+            else :
+                print(f"ID: {id_choise} Does not Exists")
+
+        elif len(results) == 1 :
+            student_id = results[0]['id']
+            print('Student Details are : ')
+            print(results)
+            final_choise = input(f"Proceed with {student_id} Deletion? : [y]/[n] : ").strip().lower()
+            
+            if final_choise == "y":
+                delete_pupil_by_id(student_id)
+                print('Student Deleted')
+            
+            else :
+                pass
+
+    elif choise == "2":
+        id_choise = input("Provide Student's ID : ").strip()
+        while id_choise.isalpha():
+            id_choise = input("Number Please... Provide Student's ID : ").strip()
+        id_choise = int(id_choise)
+        result = search_by_id(id_choise)
+        
+        if len(result) == 0 :
+            print(f"ID: {id_choise} does not exists")
+        
+        else :
+            delete_pupil_by_id(id_choise)
+            print('Student Deleted')
+
+
 def print_student_name_from_id():
     found = False
     student_name_id = input("Please provide a student id : ").strip()
@@ -62,7 +121,6 @@ def print_student_name_from_id():
         print("Student id does not exists")
 
 def create_record():
-
     name = input("Give Student's First name : ")
     while not name.isalpha():
         name = input("Give a legit First name : ")
@@ -119,7 +177,7 @@ def main():
               '3. Update a Record\n'
               '4. Delete a Record\n'
               '5. Quit')
-        print("*" * 25 + '\n')
+        print("*" * 25)
         choise = int(input('Please Choose : '))
 
         if choise == 1:
@@ -141,12 +199,10 @@ def main():
                 print("Student details are : ")
                 for student in students:
                     print(student)
-                print()
 
             elif sub_choise == "3":
                 print("Student names are : ")
                 print_student_details()
-                print("\n")
 
         elif choise == 3:
             print("Please Choose From the below Options : \n"
@@ -159,10 +215,13 @@ def main():
             if ch == '1':
                 name_ch = input("Please Provide Student's Last Name : ")
                 name_ch = search_by_last_name(name_ch)
+                
                 if len(name_ch) == 0 :
                     print('No Records')
+                
                 elif len(name_ch) == 1 :
                     print(name_ch)
+                
                 elif len(name_ch) >= 2 :
                     for student in name_ch:
                         print(student)
@@ -180,15 +239,17 @@ def main():
                     id_ch = input("No letters Please. Please Provide Student's ID : ")
                 id_ch = int(id_ch)
                 id_results = search_by_id(id_ch)
+                
                 if len(id_results) == 0:
                     print('No Records')
+                
                 else :
                     print(f"Student Details Are : {id_results}\n"
                           f"Update Records")
                     update_by_id(id_ch)
 
         elif choise == 4:
-            ...
+            delete_method()
 
         elif choise == 5:
             print('Bye Bye')
@@ -197,4 +258,5 @@ def main():
     print(f"Student list are {students}")
 
 
-main()
+if __name__ == '__main__':
+    main()
