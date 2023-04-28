@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="admin">
+
+<h1>Create User</h1>
+
+<form action="/admin" method="POST">
+    <label for="User_Name">User_Name</label>
+   <input type ='text' name="username" id='username'>
+   <label for="User_Password">User_Password</label>
+   <input type ='text' name="userpassword" id='userpassword"'>
+   <input type ='submit' value = 'create user'>
+</form>
+
+</div>
+
+{% endblock %}
