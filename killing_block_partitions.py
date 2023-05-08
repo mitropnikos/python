@@ -4,7 +4,7 @@ from datetime import datetime
 if __name__ == '__main__':
         print "{", datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "} Starting killing"
         conn = psycopg2.connect(
-                "dbname=edb user=enterprisedb host=localhost port=5444")
+                "dbname=**** user=**** host=localhost port=****")
         cursor = conn.cursor()
         cursor.execute( "select pid from"
                         "(select *,((EXTRACT(epoch FROM (SELECT (NOW() - query_start))))::int) as sec "
