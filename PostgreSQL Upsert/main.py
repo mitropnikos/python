@@ -39,23 +39,23 @@ else:
     
     
 def job(min_date, max_date, etl_id ):
-# extracting data from hive
-etl.log_screen(f'HIVE: Creating hdfs_staging_table for time range >= {min_date} and <= {max_date}')
-etl.run_sql('bihivesys', 'drop table if exists hdfs_staging_table')
-etl.run_sql('bihivesys', sq.query1.format(min_date = min_date, max_date = max_date, etl_id = etl_id))
-etl.run_sql('bihivesys', 'refresh table hdfs_staging_table')
+    # extracting data from hive
+    etl.log_screen(f'HIVE: Creating hdfs_staging_table for time range >= {min_date} and <= {max_date}')
+    etl.run_sql('bihivesys', 'drop table if exists hdfs_staging_table')
+    etl.run_sql('bihivesys', sq.query1.format(min_date = min_date, max_date = max_date, etl_id = etl_id))
+    etl.run_sql('bihivesys', 'refresh table hdfs_staging_table')
 
-# Creating citus staging table that will host the data from the above step
-etl.log_screen('Citus : Creating citus_staging_tbl')
-etl.run_sql('citus', 'drop table if exists citus_staging_tbl')
-etl.run_sql('citus', sq.query2)
+    # Creating citus staging table that will host the data from the above step
+    etl.log_screen('Citus : Creating citus_staging_tbl')
+    etl.run_sql('citus', 'drop table if exists citus_staging_tbl')
+    etl.run_sql('citus', sq.query2)
 
-# We trasfer the Data from Hive to Citus by using a "bridge connection" -- ddl_hive.sql
-etl.log_screen('Loading Data from Hive to Citus - Bridge Connection - ')
-etl.run_sql('bihivesys', sq.query3)
+    # We trasfer the Data from Hive to Citus by using a "bridge connection" -- ddl_hive.sql
+    etl.log_screen('Loading Data from Hive to Citus - Bridge Connection - ')
+    etl.run_sql('bihivesys', sq.query3)
 
-#We tranfer the stagging data on Citus to our main table that hosts all historical data
-etl.log_screen('Citus : Loading data from Stagging table to Production one')
-etl.run_sql('citus', sq.query4)
+    #We tranfer the stagging data on Citus to our main table that hosts all historical data
+    etl.log_screen('Citus : Loading data from Stagging table to Production one')
+    etl.run_sql('citus', sq.query4)
     
     
