@@ -149,6 +149,7 @@ def main():
     try:
         final_df = imdb_dict()
         final_df.to_csv('movies.csv',index=None, encoding='utf-8-sig')
+	final_df = final_df.drop_duplicates()
         run_sql('postgresys', drop1)
         run_sql('postgresys', create1)
         run_sql('postgresys', copy_query)
