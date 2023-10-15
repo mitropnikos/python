@@ -131,13 +131,6 @@ def imdb_dict():
             movies_dictionary['Rating'].extend(rating)
             #movies_dictionary['Director'].extend(director)
 
-            # Add movie data to dictionary
-            movies_dictionary['Name'].extend(name)
-            movies_dictionary['Year'].extend(year)
-            movies_dictionary['Certificate'].extend(certificate)
-            movies_dictionary['Duration'].extend(duration)
-            movies_dictionary['Rating'].extend(rating)
-            #movies_dictionary['Director'].extend(director)
         except Exception as e:
             print(f"Error processing page {url}: {e}")
 
