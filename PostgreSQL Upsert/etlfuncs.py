@@ -33,9 +33,7 @@ def log_db(job_id, job_name, run_id, event_type, error_msg, job_metadata):
     '''.format(job_id, local_ts, job_name, run_id, event_type, error_msg, job_metadata)
     run_sql('citus', insertquery)
 
-#key = Fernet.generate_key()
-#with open("key.key", "wb") as key_file:
-#   key_file.write(key)
+
 
 def encrypt_pwd(pwd, key):
     cipher_eng = Fernet(key)
@@ -65,7 +63,6 @@ def run_sql_hive(dsn, query, partitions):
 def get_sql_data(dsn, query):
     conn = pyodbc.connect(f'DSN={dsn}', autocommit=True)
     return pd.read_sql(query, conn)
-    conn.close()
 
 def load_to_hdfs(upload_dir, local_fname):
     HDFS_URL = hdfs_info["URL"]
@@ -265,7 +262,7 @@ def send_email(email_subject, sent_from, send_to, cc, bcc, content_plain,
     msg['To'] = send_to
     msg['Cc'] = cc
     msg['Bcc'] = bcc
-    #msg.add_header('reply-to', 'reporting@upstreamsystems.com')
+    #msg.add_header('reply-to', 'reporting@..')
     msg.set_content(content_plain)
     msg.add_alternative(content_html, subtype='html')
     
@@ -277,7 +274,7 @@ def send_email(email_subject, sent_from, send_to, cc, bcc, content_plain,
                                     subtype='octet-stream',
                                     filename=fname)
 
-    s = smtplib.SMTP('lhvmsrv107.lh.upstreamsystems.com')
+    s = smtplib.SMTP('********')
     s.send_message(msg)
     s.quit()
 
@@ -289,7 +286,7 @@ def send_email_ext(email_subject, sent_from, send_to, cc, bcc, content_plain,
     msg['To'] = send_to
     msg['Cc'] = cc
     msg['Bcc'] = bcc
-    #msg.add_header('reply-to', 'reporting@upstreamsystems.com')
+    #msg.add_header('reply-to', 'reporting@..')
     msg.set_content(content_plain)
     msg.add_alternative(content_html, subtype='html')
     
@@ -340,9 +337,9 @@ def ftp_upload(credentials_dict, remote_path, local_path):
 
 # function to execute main() and send email upon failure
 def exec_main(main, job_id, job_name, run_id, job_metadata,
-              db_logging=True, send_to='reporting@upstreamsystems.com', send_cc=''):
+              db_logging=True, send_to='reporting@..', send_cc=''):
     email_subject = 'Failed job - ' + job_id + ' / ' + job_name + ' / ' + run_id
-    sent_from = 'BI @ Upstream <reporting@upstreamsystems.com>'
+    sent_from = 'BI @ <> <reporting@...'
     send_bcc = ''
 
     try:
