@@ -10,7 +10,7 @@ with v1 as
     		count(case when fraudulent = 0 then 1 end) as no_sbb_subs,
     		count(*) as subs,
             '{etl_id}' as etl_id
-    from my_umobile_sd.securedapiresponses 
+    from tbl 
     where 
     	local_date >= '{min_date}' and local_date <= '{max_date}'
     and result = 'SUCCESS'
