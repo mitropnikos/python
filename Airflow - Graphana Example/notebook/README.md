@@ -6,17 +6,4 @@ Project Structure
 ├── requirements.txt               # List of Python libraries required
 ├── .env                           # Environment variables file (to be created by user)
 └── orders.csv                     # The CSV file to analyze
-Requirements
-Python 3.8 or higher
-Jupyter Notebook
-Setup
-Create a virtual environment:
 
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-Create a .env file in the root directory of the project with the following content:
-
-MYSQL_DATABASE=ecommerce
-MYSQL_USER=pass
-MYSQL_PASSWORD=pass
-MYSQL_HOST=localhost:3306
